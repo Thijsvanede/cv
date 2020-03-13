@@ -45,6 +45,7 @@
 %	SET WHITESPACE
 %-------------------------------------------------------------------------------
 \def \namesize        {\huge}      % Size of the name at the top of the document
+\def \subtitlesize    {\Large}      % Size of the name at the top of the document
 \def \addressskip     {\smallskip} % The space between the two address (or phone/email) lines
 \def \sectionlineskip {\medskip}   % The space above the horizontal line for each section 
 \def \nameskip        {\bigskip}   % The space after your name at the top
@@ -57,6 +58,8 @@
 % Define name - empty by default
 \def \@name {}
 \def \name #1 {\def \@name {#1}}
+\let \@subtitle \relax
+\def \subtitle #1 {\def \@subtitle {#1}}
 
 % Define conact information
 \let \@address      \relax
@@ -99,7 +102,14 @@
 	\hfil{\MakeUppercase{\namesize\bf \@name}}\hfil
 	\nameskip\break
 	\endgroup
-	\vspace{-1cm} % Print the name specified with \name
+	
+	\begingroup
+	\vspace{-1cm}
+	\hfil{\@ifundefined{@subtitle}{}{\subtitlesize \@subtitle\\}}\hfil
+	\nameskip\break
+	\endgroup
+	
+	\vspace{-1.5cm} % Print the name specified with \name
 }
 
 %-------------------------------------------------------------------------------
@@ -169,7 +179,7 @@
 	\begin{table}[!h]
 		\begin{tabularx}{\textwidth}{p{1.75cm} X}
 			#1 & \textbf{#3} \hfill \emph{#2}\\
-			   & #4
+			   & \makecell[cl]{#4}
 		\end{tabularx}
 	\end{table}
 }
@@ -178,7 +188,7 @@
 	\vspace{-.2cm}
 	\begin{table}[!h]
 		\begin{tabularx}{\textwidth}{p{1.75cm} X}
-			#1 & #3 \hfill \emph{#2}\\
+			#1 & \makecell[tl]{#3} \hfill \emph{#2}\\
 		\end{tabularx}
 	\end{table}
 	\vspace{-.2cm}
