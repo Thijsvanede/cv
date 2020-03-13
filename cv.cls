@@ -50,6 +50,7 @@
 \def \sectionlineskip {\medskip}   % The space above the horizontal line for each section 
 \def \nameskip        {\bigskip}   % The space after your name at the top
 \def \sectionskip     {\bigskip}   % The space after the heading section
+\setlength\tabcolsep{0pt}
 
 %-------------------------------------------------------------------------------
 %	CONTACT INFO
@@ -123,7 +124,6 @@
 	\MakeUppercase{\textbf{#1}} % Section title
 	\sectionlineskip
 	\hrule % Horizontal line
-	\sectionlineskip
 }
 
 %-------------------------------------------------------------------------------
@@ -178,8 +178,8 @@
 \newcommand{\cvitem}[4]{
 	\begin{table}[!h]
 		\begin{tabularx}{\textwidth}{p{1.75cm} X}
-			#1 & \textbf{#3} \hfill \emph{#2}\\
-			   & \makecell[cl]{#4}
+			#1 & \hspace{12pt} \textbf{#3} \hfill \emph{#2}\\
+			   & \hspace{12pt} \makecell[cl]{#4}
 		\end{tabularx}
 	\end{table}
 }
@@ -188,7 +188,7 @@
 	\vspace{-.2cm}
 	\begin{table}[!h]
 		\begin{tabularx}{\textwidth}{p{1.75cm} X}
-			#1 & \makecell[tl]{#3} \hfill \emph{#2}\\
+			#1 & \hspace{12pt} \makecell[tl]{#3} \hfill \emph{#2}\\
 		\end{tabularx}
 	\end{table}
 	\vspace{-.2cm}
@@ -198,7 +198,7 @@
 	\vspace{-.2cm}
 	\begin{table}[!h]
 		\begin{tabularx}{\textwidth}{p{4cm} X}
-			\textbf{#1} & #3 \hfill \emph{#2}\\
+			\textbf{#1} & \hspace{12pt} #3 \hfill \emph{#2}\\
 		\end{tabularx}
 	\end{table}
 	\vspace{-.2cm}
