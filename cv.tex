@@ -1,0 +1,75 @@
+% !BIB program = biber
+
+% Create CV on A4 paper
+\documentclass{cv}
+
+% Name
+\name{Thijs van Ede}
+
+% Contact info - work
+%---------------------------------------
+\organization{University of Twente}
+\department{Faculty of EEMCS}
+\room{Zilverling 2042}
+
+% Contact info location
+%---------------------------------------
+\address{P.O. Box 217}
+\zipcode{7500 AE}
+\cityname{Enschede}
+\country{The Netherlands}
+
+% Contact info social
+%---------------------------------------
+% Define email
+\email{t.s.vanede@utwente.nl}
+% Define google scholar page
+\scholar{https://scholar.google.com/citations?user=tb8\_7jEAAAAJ\&hl=en\&oi=ao}
+% Define github username
+\github{Thijsvanede}
+% Define linkedin shortlink
+\linkedin{/in/thijsvanede}
+% Define website
+\website{https://vm-thijs.ewi.utwente.nl}
+
+% Bibliography to use as publications
+\addbibresource{bibliography.bib}
+
+\begin{document}
+	
+	% Contact details
+	\contact		
+	
+	% Research interests
+	\section{Research Interests}
+		My current research focuses on the detection of intrusions in evolving systems.
+		Within this research, I concentrate on network-based approaches for constructing and analysing detection mechanisms.
+		This involves modelling normal behaviour of systems, detecting anomalous behaviour, and most importantly, assessing the cause of these anomalies.
+		By doing so, I intend to create an intrusion detection system that automatically evolves and deals with changes that are introduced to the monitored systems.
+	
+	% Educational background
+	\section{Education}
+		\cvitem{since 2018}{University of Twente}{PhD in Computer Science}{On Evolutionary Intrusion Detection for Changing Environments}
+		\cvitem{2015-2017}{University of Twente}{Master Degree in Computer Science - \emph{cum laude}}{Specialising in Cyber Security. Thesis: \link{https://essay.utwente.nl/74240/1/van\%20Ede_MA_EEMCS.pdf}{Detecting Adaptive Data Exfiltration in HTTP Traffic}}
+		\cvitem{2012-2015}{University of Twente}{Bachelor Degree in Computer Science - \emph{with honours}}{Minor in Computer Science and Finance at \emph{M{\"a}lardalen University.}}
+		\cvitem{2006-2012}{Chr. College Nassau Veluwe}{High School}{Pre-university education, specialising in science and engineering.}
+
+	\section{Publications}
+		% Ensure everything is cited
+		\nocite{*}
+		% Print bibliography
+		\printbibliography[heading=none,title=none]
+		
+	\section{Teaching}
+		\cvitemshort{since 2019}{University of Twente}{Teaching assistant for ``Privacy Enhancing Technologies''}
+		\cvitemshort{since 2018}{University of Twente}{Teaching assistant for ``AI in Security''}
+		
+	\section{Advising}
+		\cvitemshort{since 2019}{University of Twente}{\small Context Aware Identifier Deobfuscation for Android Applications \normalsize}
+		\cvitemshort{\hfill 2019}{University of Twente}{\small \link{https://essay.utwente.nl/79732/1/TychoTeesselink_MA_EEMCS.pdf}{Identifying Application Phases in Mobile Encrypted Network Traffic} \normalsize}
+		
+	\section{References}
+		\reference{Maarten van Steen}{Professor at University of Twente}{\link{mailto:m.r.vansteen@utwente.nl}{m.r.vansteen@utwente.nl}}
+		\reference{Andreas Peter}{Associate Professor at University of Twente}{\link{mailto:a.peter@utwente.nl}{a.peter@utwente.nl}}
+	
+\end{document}
