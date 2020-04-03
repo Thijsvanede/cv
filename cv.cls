@@ -20,7 +20,7 @@
 % Suppress page numbers
 \pagestyle{empty}
 % Set margins
-\usepackage[left=0.75in,top=0.6in,right=0.75in,bottom=0.6in]{geometry}
+\usepackage[left=0.75in,top=0.75in,right=0.75in,bottom=0.75in]{geometry}
 % Use for links
 \usepackage[colorlinks]{hyperref}
 % Use fonts
@@ -37,9 +37,8 @@
 \usepackage[dvipsnames]{xcolor}
 % Replace strings
 \usepackage{xstring}
-
-% Define link
-\newcommand{\link}[2]{\href{#1}{\color{Maroon}#2}}
+% Draw colored box
+\usepackage{tcolorbox}
 
 %-------------------------------------------------------------------------------
 %	SET WHITESPACE
@@ -51,6 +50,52 @@
 \def \nameskip        {\bigskip}   % The space after your name at the top
 \def \sectionskip     {\bigskip}   % The space after the heading section
 \setlength\tabcolsep{0pt}
+
+%-------------------------------------------------------------------------------
+%	DEFINE COLOURS
+%-------------------------------------------------------------------------------
+\def \colorheader {black}
+\def \colorlink   {Maroon}
+\def \colorpage   {white}
+\def \colortext   {black}
+\def \colortitle  {black}
+\def \colortitlebg{\colorpage}
+
+%-------------------------------------------------------------------------------
+%	OPTIONS
+%-------------------------------------------------------------------------------
+
+% Specify modern
+\DeclareOption{modern}{
+	% Set font to sans serif
+	\renewcommand{\familydefault}{\sfdefault}
+	\definecolor{dark}      {HTML}{372214}
+	\definecolor{medium}    {HTML}{794228}
+	\definecolor{light}     {HTML}{B8733A}
+	\definecolor{background}{HTML}{BEC2CB}
+	\definecolor{text}      {HTML}{34302C}
+	
+	% Set section colours
+	\def \colorheader {medium}
+	\def \colorlink   {light}
+	\def \colorpage   {white}
+	\def \colortext   {text}
+	\def \colortitle  {white}
+	\def \colortitlebg{medium}
+	
+	% Adapt geometry
+	\newgeometry{left=0.5in,top=0.5in,right=0.5in,bottom=0.5in}
+}
+
+% Process options
+\ProcessOptions\relax
+
+%-------------------------------------------------------------------------------
+%	LINKS
+%-------------------------------------------------------------------------------
+
+% Define link
+\newcommand{\link}[2]{\href{#1}{\color{\colorlink}#2}}
 
 %-------------------------------------------------------------------------------
 %	CONTACT INFO
@@ -99,18 +144,37 @@
 \let\ori@document=\document
 \renewcommand{\document}{
 	\ori@document  % Begin document
-	\begingroup
-	\hfil{\MakeUppercase{\namesize\bf \@name}}\hfil
-	\nameskip\break
-	\endgroup
+	% Set page color
+	\pagecolor{\colorpage}
 	
-	\begingroup
-	\vspace{-1cm}
-	\hfil{\@ifundefined{@subtitle}{}{\subtitlesize \@subtitle\\}}\hfil
-	\nameskip\break
-	\endgroup
+	\textbf{}
+	\vspace{-1in}
+	\begin{tcolorbox}[size=tight,oversize,sharp corners,
+		colback=\colortitlebg,
+		colframe=\colortitlebg,
+		left=0.75in,
+		right=0.75in,
+		top=0.6in,
+		bottom=-1cm,]
+		% Set section color	
+		\color{\colortitle}
 	
-	\vspace{-1.5cm} % Print the name specified with \name
+		\begingroup
+		\hfil{\MakeUppercase{\namesize\bf \@name}}\hfil
+		\nameskip\break
+		\endgroup
+		
+		\begingroup
+		\vspace{-.75cm}
+		\hfil{\@ifundefined{@subtitle}{}{\subtitlesize \@subtitle\\}}\hfil
+		\nameskip\break
+		\endgroup	
+	\end{tcolorbox}
+	
+	\vspace{-.25cm} % Print the name specified with \name
+	
+	\color{\colortext}
+%	\newgeometry{top=0.6in, left=0.75in, right=0.75in}
 }
 
 %-------------------------------------------------------------------------------
@@ -119,11 +183,13 @@
 
 % Section in the CV
 \renewcommand{\section}[1]{
-	\FloatBarrier
-	\sectionskip
-	\MakeUppercase{\textbf{#1}} % Section title
-	\sectionlineskip
-	\hrule % Horizontal line
+	\color{\colorheader}
+		\FloatBarrier
+		\sectionskip
+		\MakeUppercase{\textbf{#1}} % Section title
+		\sectionlineskip
+		\hrule % Horizontal line
+	\color{\colortext}
 }
 
 %-------------------------------------------------------------------------------
@@ -137,12 +203,19 @@
 		\begin{tabularx}{\textwidth}{X r}
 			% Address column
 			\makecell[cl]{
+				\color{\colortext} 
 				\@ifundefined{@organization}{}{\@organization\\}
+				\color{\colortext} 
 				\@ifundefined{@department}  {}{\@department\\}
+				\color{\colortext} 
 				\@ifundefined{@room}        {}{\@room\\}
+				\color{\colortext} 
 				\@ifundefined{@address}     {}{\@address\\}
+				\color{\colortext} 
 				\@ifundefined{@zipcode}     {}{\@zipcode\@ifundefined{@cityname}{\\}{,}}
+				\color{\colortext} 
 				\@ifundefined{@cityname}    {}{\@cityname\\}
+				\color{\colortext} 
 				\@ifundefined{@country}     {}{\@country\\}
 			}
 		
@@ -177,6 +250,7 @@
 
 \newcommand{\cvitem}[4]{
 	\begin{table}[!h]
+		\color{\colortext} 
 		\begin{tabularx}{\textwidth}{p{1.75cm} X}
 			#1 & \hspace{12pt} \textbf{#3} \hfill \emph{#2}\\
 			   & \hspace{12pt} \makecell[cl]{#4}
@@ -187,6 +261,7 @@
 \newcommand{\cvitemshort}[3]{
 	\vspace{-.2cm}
 	\begin{table}[!h]
+		\color{\colortext} 
 		\begin{tabularx}{\textwidth}{p{1.75cm} X}
 			#1 & \hspace{12pt} \makecell[tl]{#3} \hfill \emph{#2}\\
 		\end{tabularx}
@@ -197,6 +272,7 @@
 \newcommand{\reference}[3]{
 	\vspace{-.2cm}
 	\begin{table}[!h]
+		\color{\colortext} 
 		\begin{tabularx}{\textwidth}{p{4cm} X}
 			\textbf{#1} & \hspace{12pt} #3 \hfill \emph{#2}\\
 		\end{tabularx}
