@@ -25,6 +25,8 @@
 \usepackage[colorlinks]{hyperref}
 % Use fonts
 \usepackage{fontawesome}
+% For if-else statements
+\usepackage{ifthen}
 % Remove paragraph indentation
 \usepackage[parfill]{parskip}
 % Required for table formatting
@@ -65,8 +67,12 @@
 %	OPTIONS
 %-------------------------------------------------------------------------------
 
+\let \@modern \relax
 % Specify modern
 \DeclareOption{modern}{
+	% Set modern to true
+	\def \@modern {TRUE}
+	
 	% Set font to sans serif
 	\renewcommand{\familydefault}{\sfdefault}
 	\definecolor{dark}      {HTML}{372214}
@@ -148,13 +154,14 @@
 	\pagecolor{\colorpage}
 	
 	\textbf{}
-	\vspace{-1in}
+	\@ifundefined{@modern}{\vspace{-.75in}}{\vspace{-1in}}
+	
 	\begin{tcolorbox}[size=tight,oversize,sharp corners,
 		colback=\colortitlebg,
 		colframe=\colortitlebg,
-		left=0.75in,
-		right=0.75in,
-		top=0.6in,
+		left=0.5in,
+		right=0.5in,
+		top=0.4in,
 		bottom=-1cm,]
 		% Set section color	
 		\color{\colortitle}
@@ -174,7 +181,6 @@
 	\vspace{-.25cm} % Print the name specified with \name
 	
 	\color{\colortext}
-%	\newgeometry{top=0.6in, left=0.75in, right=0.75in}
 }
 
 %-------------------------------------------------------------------------------
