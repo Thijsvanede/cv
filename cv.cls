@@ -259,7 +259,7 @@
 		\color{\colortext} 
 		\begin{tabularx}{\textwidth}{p{1.75cm} X}
 			#1 & \hspace{12pt} \textbf{#3} \hfill \emph{#2}\\
-			   & \hspace{12pt} \makecell[cl]{#4}
+			   & \hspace{12pt} \makecell[{{p{14.8cm}}}]{#4}
 		\end{tabularx}
 	\end{table}
 }
