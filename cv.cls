@@ -17,6 +17,8 @@
 
 % Use bibliography
 \usepackage[backend=biber,style=authoryear,sorting=ydnt]{biblatex}
+% For margin calculation
+\usepackage{calc}
 % Suppress page numbers
 \pagestyle{empty}
 % Set margins
@@ -46,7 +48,7 @@
 %	SET WHITESPACE
 %-------------------------------------------------------------------------------
 \def \namesize        {\huge}      % Size of the name at the top of the document
-\def \subtitlesize    {\Large}      % Size of the name at the top of the document
+\def \subtitlesize    {\Large}     % Size of the name at the top of the document
 \def \addressskip     {\smallskip} % The space between the two address (or phone/email) lines
 \def \sectionlineskip {\medskip}   % The space above the horizontal line for each section 
 \def \nameskip        {\bigskip}   % The space after your name at the top
@@ -259,7 +261,7 @@
 		\color{\colortext} 
 		\begin{tabularx}{\textwidth}{p{1.75cm} X}
 			#1 & \hspace{12pt} \textbf{#3} \hfill \emph{#2}\\
-			   & \hspace{12pt} \makecell[{{p{14.8cm}}}]{#4}
+			   & \hspace{12pt} \makecell[{{p{\textwidth - 2.25cm}}}]{#4}
 		\end{tabularx}
 	\end{table}
 }
