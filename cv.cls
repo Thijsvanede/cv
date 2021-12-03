@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% CV 
+% CV
 %
 % Copyright (C) 2020 by Thijs van Ede
 %
@@ -25,6 +25,8 @@
 \usepackage[left=0.75in,top=0.75in,right=0.75in,bottom=0.75in]{geometry}
 % Use for links
 \usepackage[colorlinks]{hyperref}
+% Place tables where we want
+\usepackage{float}
 % Use fonts
 \usepackage{fontawesome}
 % For if-else statements
@@ -35,6 +37,8 @@
 \usepackage{placeins}
 % Format table cells
 \usepackage{makecell}
+% Format table cells
+\usepackage{multirow}
 % Required for tables
 \usepackage{tabularx}
 % Use different colors
@@ -50,10 +54,11 @@
 \def \namesize        {\huge}      % Size of the name at the top of the document
 \def \subtitlesize    {\Large}     % Size of the name at the top of the document
 \def \addressskip     {\smallskip} % The space between the two address (or phone/email) lines
-\def \sectionlineskip {\medskip}   % The space above the horizontal line for each section 
+\def \sectionlineskip {\medskip}   % The space above the horizontal line for each section
 \def \nameskip        {\bigskip}   % The space after your name at the top
 \def \sectionskip     {\bigskip}   % The space after the heading section
 \setlength\tabcolsep{0pt}
+\def \datemargin      {1.75cm}
 
 %-------------------------------------------------------------------------------
 %	DEFINE COLOURS
@@ -74,7 +79,7 @@
 \DeclareOption{modern}{
 	% Set modern to true
 	\def \@modern {TRUE}
-	
+
 	% Set font to sans serif
 	\renewcommand{\familydefault}{\sfdefault}
 	\definecolor{dark}      {HTML}{372214}
@@ -82,7 +87,7 @@
 	\definecolor{light}     {HTML}{B8733A}
 	\definecolor{background}{HTML}{BEC2CB}
 	\definecolor{text}      {HTML}{34302C}
-	
+
 	% Set section colours
 	\def \colorheader {medium}
 	\def \colorlink   {light}
@@ -90,7 +95,7 @@
 	\def \colortext   {text}
 	\def \colortitle  {white}
 	\def \colortitlebg{medium}
-	
+
 	% Adapt geometry
 	\newgeometry{left=0.5in,top=0.5in,right=0.5in,bottom=0.5in}
 }
@@ -154,10 +159,10 @@
 	\ori@document  % Begin document
 	% Set page color
 	\pagecolor{\colorpage}
-	
+
 	\textbf{}
 	\@ifundefined{@modern}{\vspace{-.75in}}{\vspace{-1in}}
-	
+
 	\begin{tcolorbox}[size=tight,oversize,sharp corners,
 		colback=\colortitlebg,
 		colframe=\colortitlebg,
@@ -165,23 +170,23 @@
 		right=0.5in,
 		top=0.4in,
 		bottom=-1cm,]
-		% Set section color	
+		% Set section color
 		\color{\colortitle}
-	
+
 		\begingroup
 		\hfil{\MakeUppercase{\namesize\bf \@name}}\hfil
 		\nameskip\break
 		\endgroup
-		
+
 		\begingroup
 		\vspace{-.75cm}
 		\hfil{\@ifundefined{@subtitle}{}{\subtitlesize \@subtitle\\}}\hfil
 		\nameskip\break
-		\endgroup	
+		\endgroup
 	\end{tcolorbox}
-	
+
 	\vspace{-.25cm} % Print the name specified with \name
-	
+
 	\color{\colortext}
 }
 
@@ -204,31 +209,31 @@
 %	CONTACT FORMATTING
 %-------------------------------------------------------------------------------
 \newcommand{\contact}{
-	
+
 	\section{Contact}
 	\vspace{-.25cm}
 	\begin{table}[!h]
 		\begin{tabularx}{\textwidth}{X r}
 			% Address column
 			\makecell[cl]{
-				\color{\colortext} 
+				\color{\colortext}
 				\@ifundefined{@organization}{}{\@organization\\}
-				\color{\colortext} 
+				\color{\colortext}
 				\@ifundefined{@department}  {}{\@department\\}
-				\color{\colortext} 
+				\color{\colortext}
 				\@ifundefined{@room}        {}{\@room\\}
-				\color{\colortext} 
+				\color{\colortext}
 				\@ifundefined{@address}     {}{\@address\\}
-				\color{\colortext} 
+				\color{\colortext}
 				\@ifundefined{@zipcode}     {}{\@zipcode\@ifundefined{@cityname}{\\}{,}}
-				\color{\colortext} 
+				\color{\colortext}
 				\@ifundefined{@cityname}    {}{\@cityname\\}
-				\color{\colortext} 
+				\color{\colortext}
 				\@ifundefined{@country}     {}{\@country\\}
 			}
-		
+
 			&
-			
+
 			% Socials column
 			\makecell[cr]{
 				% Print email if given
@@ -245,7 +250,7 @@
 					\link{https://github.com/\@github}{\@github} \faGithub\\}
 				% Print website if given
 				\@ifundefined{@website}{}{
-					\link{\@website}{\@website} \faGlobe\\}	
+					\link{\@website}{\@website} \faGlobe\\}
 			}
 		\end{tabularx}
 	\end{table}
@@ -257,20 +262,21 @@
 %-------------------------------------------------------------------------------
 
 \newcommand{\cvitem}[4]{
-	\begin{table}[!h]
-		\color{\colortext} 
-		\begin{tabularx}{\textwidth}{p{1.75cm} X}
-			#1 & \hspace{12pt} \textbf{#3} \hfill \emph{#2}\\
+	\begin{table}[H]
+		\color{\colortext}
+		\begin{tabularx}{\textwidth}{p{\datemargin} X}
+			\multirow[t]{2}{\datemargin}{#1} & \hspace{12pt} \textbf{#3} \hfill \emph{#2}\\
 			   & \hspace{12pt} \makecell[{{p{\textwidth - 2.25cm}}}]{#4}
 		\end{tabularx}
 	\end{table}
+	\vspace{-.2cm}
 }
 
 \newcommand{\cvitemshort}[3]{
 	\vspace{-.2cm}
-	\begin{table}[!h]
-		\color{\colortext} 
-		\begin{tabularx}{\textwidth}{p{1.75cm} X}
+	\begin{table}[H]
+		\color{\colortext}
+		\begin{tabularx}{\textwidth}{p{\datemargin} X}
 			#1 & \hspace{12pt} \makecell[tl]{#3} \hfill \emph{#2}\\
 		\end{tabularx}
 	\end{table}
@@ -279,8 +285,8 @@
 
 \newcommand{\reference}[3]{
 	\vspace{-.2cm}
-	\begin{table}[!h]
-		\color{\colortext} 
+	\begin{table}[H]
+		\color{\colortext}
 		\begin{tabularx}{\textwidth}{p{4cm} X}
 			\textbf{#1} & \hspace{12pt} #3 \hfill \emph{#2}\\
 		\end{tabularx}
