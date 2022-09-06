@@ -16,7 +16,7 @@
 \LoadClass[11pt,a4paper]{article}
 
 % Use bibliography
-\usepackage[backend=biber,style=authoryear,sorting=ydnt]{biblatex}
+\usepackage[backend=biber,style=authoryear,sorting=none]{biblatex}
 % For margin calculation
 \usepackage{calc}
 % Suppress page numbers
