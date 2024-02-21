@@ -269,27 +269,27 @@
 			   & \hspace{12pt} \makecell[{{p{\textwidth - 2.25cm}}}]{#4}
 		\end{tabularx}
 	\end{table}
-	\vspace{-.2cm}
+	\vspace{-.3cm}
 }
 
 \newcommand{\cvitemshort}[3]{
-	\vspace{-.2cm}
+	\vspace{-.3cm}
 	\begin{table}[H]
 		\color{\colortext}
 		\begin{tabularx}{\textwidth}{p{\datemargin} X}
 			#1 & \hspace{12pt} \makecell[tl]{#3} \hfill \emph{#2}\\
 		\end{tabularx}
 	\end{table}
-	\vspace{-.2cm}
+	\vspace{-.3cm}
 }
 
 \newcommand{\reference}[3]{
-	\vspace{-.2cm}
+	\vspace{-.3cm}
 	\begin{table}[H]
 		\color{\colortext}
 		\begin{tabularx}{\textwidth}{p{4cm} X}
 			\textbf{#1} & \hspace{12pt} #3 \hfill \emph{#2}\\
 		\end{tabularx}
 	\end{table}
-	\vspace{-.2cm}
+	\vspace{-.3cm}
 }
